@@ -8,5 +8,6 @@ LDFLAGS=(
   "-X 'main.shareKey=${SHARE_KEY}'"
 )
 
+cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" ../../ui/packages/web/public/wasm_exec.js
 # reduces by ~2MB but makes really slow: -gcflags=all="-l -B -C -std"
 GOOS=js GOARCH=wasm go build -o main.wasm -ldflags="${LDFLAGS[*]}" $@
