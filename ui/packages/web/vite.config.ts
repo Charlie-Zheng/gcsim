@@ -9,6 +9,7 @@ export default ({ }: ConfigEnv) => {
   process.env.VITE_GIT_BRANCH = git.branch();
 
   return defineConfig({
+    base: "/gcsim/",
     plugins: [
       react(),
       tsconfigPaths(),

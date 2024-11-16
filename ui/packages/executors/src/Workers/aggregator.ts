@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // @ts-ignore
-self.importScripts("/wasm_exec.js");
+self.importScripts("../wasm_exec.js");
 
 if (!WebAssembly.instantiateStreaming) {
   // polyfill
@@ -14,16 +14,17 @@ if (!WebAssembly.instantiateStreaming) {
 function ready(req: { wasm: string }) {
   const go = new Go();
   WebAssembly.instantiateStreaming(fetch(req.wasm), go.importObject)
-      .then((result) => {
-        go.run(result.instance);
-        console.log("aggregator loaded okay");
-        postMessage({ type: AggResponse.Ready });
-      }).catch((e) => {
-        console.error(e);
-        postMessage({
-          type: AggResponse.Failed,
-          reason: e instanceof Error ? e.message : "Unknown Error" });
+    .then((result) => {
+      go.run(result.instance);
+      console.log("aggregator loaded okay");
+      postMessage({ type: AggResponse.Ready });
+    }).catch((e) => {
+      console.error(e);
+      postMessage({
+        type: AggResponse.Failed,
+        reason: e instanceof Error ? e.message : "Unknown Error"
       });
+    });
 }
 
 // @ts-ignore
