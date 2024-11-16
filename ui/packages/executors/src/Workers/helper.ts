@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // @ts-ignore
-self.importScripts("/wasm_exec.js");
+self.importScripts("../wasm_exec.js");
 
 if (!WebAssembly.instantiateStreaming) {
   // polyfill
@@ -16,16 +16,17 @@ let readyState = false;
 function ready(req: { wasm: string }) {
   const go = new Go();
   WebAssembly.instantiateStreaming(fetch(req.wasm), go.importObject)
-      .then((result) => {
-        go.run(result.instance);
-        console.log("helper loaded okay");
-        readyState = true;
-      }).catch((e) => {
-        console.error(e);
-        postMessage({
-            type: HelpResponse.Failed,
-            reason: e instanceof Error ? e.message : "Unknown Error" });
+    .then((result) => {
+      go.run(result.instance);
+      console.log("helper loaded okay");
+      readyState = true;
+    }).catch((e) => {
+      console.error(e);
+      postMessage({
+        type: HelpResponse.Failed,
+        reason: e instanceof Error ? e.message : "Unknown Error"
       });
+    });
 }
 
 function validate(req: { id: number, cfg: string }) {

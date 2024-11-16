@@ -3,6 +3,7 @@
     "incremental": true,
     "composite": true,
     "declaration": true,
+    "baseUrl": "gcsim/",
     "target": "ES2022",
     "module": "ES2022",
     "moduleResolution": "Node",

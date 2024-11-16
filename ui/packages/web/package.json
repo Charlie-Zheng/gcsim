@@ -1,6 +1,7 @@
 {
   "name": "@gcsim/web",
   "packageManager": "yarn@3.2.4",
+  "homepage": "https://charlie-zheng.github.io/gcsim",
   "private": true,
   "scripts": {
     "dev": "vite --host",
