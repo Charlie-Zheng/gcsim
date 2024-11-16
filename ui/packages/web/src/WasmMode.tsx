@@ -11,17 +11,7 @@ const maxWorkers = 30;
 let exec: WasmExecutor | undefined;
 
 function wasmLocation() {
-  if (import.meta.env.PROD) {
-    return (
-      "/api/wasm/" +
-      import.meta.env.VITE_BRANCH +
-      "/" +
-      import.meta.env.VITE_GIT_COMMIT_HASH +
-      "/" +
-      "main.wasm"
-    );
-  }
-  return "/main.wasm";
+  return "/gcsim/main.wasm";
 }
 
 const WasmMode = ({ children }: { children: ReactNode }) => {
