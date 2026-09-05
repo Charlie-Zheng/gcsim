@@ -127,6 +127,7 @@ const (
 	Nilou                         // nilou
 	Ningguang                     // ningguang
 	Noelle                        // noelle
+	Odette                        // odette
 	Ororon                        // ororon
 	Qiqi                          // qiqi
 	RaidenShogun                  // raidenshogun
@@ -251,6 +252,7 @@ var _CharNames = [...]string{
 	"nilou",
 	"ningguang",
 	"noelle",
+	"odette",
 	"ororon",
 	"qiqi",
 	"raidenshogun",
@@ -375,6 +377,7 @@ var _CharValues = [...]Char{
 	Nilou,
 	Ningguang,
 	Noelle,
+	Odette,
 	Ororon,
 	Qiqi,
 	RaidenShogun,
