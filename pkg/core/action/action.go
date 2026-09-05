@@ -119,8 +119,9 @@ const (
 	// following action have to implementations
 	ActionSwap
 	ActionWalk
-	ActionWait  // character should stand around and wait
-	ActionDelay // delay before executing next action
+	ActionWait         // character should stand around and wait
+	ActionDelay        // delay before executing next action
+	ActionSpecialSkill // special elemental skill
 	EndActionType
 	// these are only used for frames purposes and that's why it's after end
 	ActionSkillHoldFramesOnly
@@ -141,6 +142,7 @@ var astr = []string{
 	"walk",
 	"wait",
 	"delay",
+	"special_skill",
 }
 
 func (a Action) String() string {
