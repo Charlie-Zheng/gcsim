@@ -91,7 +91,9 @@ func (c *CharWrapper) AddAttackMod(mod AttackMod) {
 //	char.AddCooldownMod(character.CooldownMod{
 //		Base: modifier.NewBaseWithHitlag("buff", 10*60),
 //		Amount: func(a action.Action) float64 {
-//			if a == action.ActionSkill {
+//			switch a {
+//			case action.ActionSkill,
+//				action.ActionSpecialSkill:
 //				return -0.15
 //			}
 //			return 0
