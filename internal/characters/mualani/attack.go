@@ -188,8 +188,10 @@ func (c *char) sharkBite(p map[string]int) action.Info {
 		minAction = action.ActionDash
 	}
 	return action.Info{
-		Frames:          frames.NewAbilFunc(sharkBiteFrames[momentumStacks]),
-		AnimationLength: sharkBiteFrames[momentumStacks][action.WalkState], // shorter animation state so that a single bite doesn't make 3 yelan/xq waves. In game it only does 1.
+		Frames: frames.NewAbilFunc(sharkBiteFrames[momentumStacks]),
+		// TODO: This triggers 3 yelan/XQ waves if the next action is swap. In game it should only trigger 1
+		// Need add method to return animations as a slice
+		AnimationLength: sharkBiteFrames[momentumStacks][action.InvalidAction],
 		CanQueueAfter:   sharkBiteFrames[momentumStacks][minAction],
 		State:           action.NormalAttackState,
 	}

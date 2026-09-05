@@ -297,7 +297,7 @@ func (c *char) ChargeAttack(p map[string]int) (action.Info, error) {
 
 			return frames.AtkSpdAdjust(f-windup, atkspd)
 		},
-		AnimationLength: chargeFrames[curSlash][action.InvalidAction] - windup,
+		AnimationLength: 500 - windup, // Account for CA0 -> CA0 error case, which is 500 frames
 		CanQueueAfter:   chargeHitmarks[curSlash] - windup,
 		State:           action.ChargeAttackState,
 	}, nil
