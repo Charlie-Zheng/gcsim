@@ -21,7 +21,7 @@ import (
 )
 
 // purpose of this test is to check that characters abilities have correct can queue after
-func TestCanQueue(t *testing.T) {
+func TestFramesFunc(t *testing.T) {
 	baseActions := [][]action.Action{
 		{action.ActionSkill},
 		{action.ActionSkill},
@@ -85,12 +85,12 @@ func TestCanQueue(t *testing.T) {
 		_ = copy(actions, baseActions)
 		// insert character specific combos, params
 		for i, a := range actions {
-			testQueue(t, k, a, baseParams[i])
+			testFramesFunc(t, k, a, baseParams[i])
 		}
 	}
 }
 
-func testQueue(t *testing.T, k keys.Char, acts []action.Action, params []map[string]int) {
+func testFramesFunc(t *testing.T, k keys.Char, acts []action.Action, params []map[string]int) {
 	c, trg := makeCore(2)
 	prof := testhelper.DefaultProfile(k, keys.DullBlade)
 	prof.Base.Cons = 6
@@ -122,7 +122,6 @@ func testQueue(t *testing.T, k keys.Char, acts []action.Action, params []map[str
 			case errors.Is(err, player.ErrActionNotReady):
 			case errors.Is(err, player.ErrPlayerNotReady):
 			case errors.Is(err, player.ErrActionNoOp):
-				break
 			default:
 				t.Errorf("unexpected error waiting for action to be ready: %v", err)
 				t.FailNow()
@@ -151,6 +150,11 @@ func testQueue(t *testing.T, k keys.Char, acts []action.Action, params []map[str
 			}
 			if evt.Frames(act) < evt.CanQueueAfter {
 				t.Errorf("character %s action %s params: %v CanQueueAfter (%d) is larger than the output of evt.Frames[%s] (%d). Action sequence: %s", c.Player.ActiveChar().Base.Key.String(), a, p, evt.CanQueueAfter, act.String(), evt.Frames(act), acts)
+				break
+			}
+
+			if evt.Frames(act) > evt.AnimationLength {
+				t.Errorf("character %s action %s params: %v AnimationLength (%d) is smaller than the output of evt.Frames[%s] (%d). Action sequence: %s", c.Player.ActiveChar().Base.Key.String(), a, p, evt.AnimationLength, act.String(), evt.Frames(act), acts)
 				break
 			}
 		}
