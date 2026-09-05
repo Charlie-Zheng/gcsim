@@ -141,6 +141,11 @@ func testFramesFunc(t *testing.T, k keys.Char, acts []action.Action, params []ma
 		}
 		c.Player.SetActionUsed(c.Player.Active(), a, &evt)
 		for act := range action.EndActionType {
+			if evt.Frames(act) > evt.AnimationLength {
+				t.Errorf("character %s action %s params: %v AnimationLength (%d) is smaller than the output of evt.Frames[%s] (%d). Action sequence: %s", c.Player.ActiveChar().Base.Key.String(), a, p, evt.AnimationLength, act.String(), evt.Frames(act), acts[:i+1])
+				break
+			}
+
 			// Normal attacks trigger this panic when there is atkspd
 			if evt.State == action.NormalAttackState && c.Player.ActiveChar().Stat(attributes.AtkSpd) > 0 {
 				break
@@ -150,15 +155,12 @@ func testFramesFunc(t *testing.T, k keys.Char, acts []action.Action, params []ma
 			if evt.State == action.ChargeAttackState && c.Player.ActiveChar().Stat(attributes.AtkSpd) > 0 {
 				break
 			}
+
 			if evt.Frames(act) < evt.CanQueueAfter {
-				t.Errorf("character %s action %s params: %v CanQueueAfter (%d) is larger than the output of evt.Frames[%s] (%d). Action sequence: %s", c.Player.ActiveChar().Base.Key.String(), a, p, evt.CanQueueAfter, act.String(), evt.Frames(act), acts)
+				t.Errorf("character %s action %s params: %v CanQueueAfter (%d) is larger than the output of evt.Frames[%s] (%d). Action sequence: %s", c.Player.ActiveChar().Base.Key.String(), a, p, evt.CanQueueAfter, act.String(), evt.Frames(act), acts[:i+1])
 				break
 			}
 
-			if evt.Frames(act) > evt.AnimationLength {
-				t.Errorf("character %s action %s params: %v AnimationLength (%d) is smaller than the output of evt.Frames[%s] (%d). Action sequence: %s", c.Player.ActiveChar().Base.Key.String(), a, p, evt.AnimationLength, act.String(), evt.Frames(act), acts)
-				break
-			}
 		}
 		for !c.Player.CanQueueNextAction() {
 			advanceCoreFrame(c)
