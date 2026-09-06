@@ -42,7 +42,7 @@ func init() {
 	attackFramesNormal[1][action.ActionJump] = 5
 	attackFramesNormal[1][action.ActionSwap] = 5
 
-	attackFramesNormal[2] = frames.InitNormalCancelSlice(attackReleaseNormal[2][0], 76)
+	attackFramesNormal[2] = frames.InitNormalCancelSlice(attackReleaseNormal[2][1], 76)
 	attackFramesNormal[2][action.ActionAttack] = 64
 	attackFramesNormal[2][action.ActionCharge] = 50
 	attackFramesNormal[2][action.ActionSkill] = 33
@@ -65,7 +65,7 @@ func init() {
 	attackFramesE[1][action.ActionDash] = 5
 	attackFramesE[1][action.ActionJump] = 5
 
-	attackFramesE[2] = frames.InitNormalCancelSlice(attackReleaseE[2][0], 70)
+	attackFramesE[2] = frames.InitNormalCancelSlice(attackReleaseE[2][1], 70)
 	attackFramesE[2][action.ActionAttack] = 54
 	attackFramesE[2][action.ActionCharge] = 53
 	attackFramesE[2][action.ActionSkill] = 33
