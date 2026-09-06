@@ -17,6 +17,8 @@ var (
 	attackReleaseNormal = [][]int{{11}, {6}, {32, 41}}
 	attackReleaseE      = [][]int{{15}, {3}, {32, 40}}
 	attackRadiusE       = []float64{2.5, 2.5, 3}
+	attackCQANormal     = []int{11, 5, 33}
+	attackCQAE          = []int{15, 3, 33}
 )
 
 const normalHitNum = 3
@@ -123,7 +125,7 @@ func (c *char) Attack(p map[string]int) (action.Info, error) {
 				frames.AtkSpdAdjust(attackFramesNormal[currentNormalCounter][next], atkspd)
 		},
 		AnimationLength: windup + attackFramesNormal[c.NormalCounter][action.InvalidAction],
-		CanQueueAfter:   windup + attackReleaseNormal[c.NormalCounter][len(attackReleaseNormal[c.NormalCounter])-1],
+		CanQueueAfter:   windup + attackCQANormal[c.NormalCounter],
 		State:           action.NormalAttackState,
 	}, nil
 }
@@ -176,7 +178,7 @@ func (c *char) WindfavoredAttack(p map[string]int) (action.Info, error) {
 				frames.AtkSpdAdjust(attackFramesE[currentNormalCounter][next], atkspd)
 		},
 		AnimationLength: windup + attackFramesE[c.NormalCounter][action.InvalidAction],
-		CanQueueAfter:   windup + attackReleaseE[c.NormalCounter][len(attackReleaseE[c.NormalCounter])-1],
+		CanQueueAfter:   windup + attackCQAE[c.NormalCounter],
 		State:           action.NormalAttackState,
 	}, nil
 }

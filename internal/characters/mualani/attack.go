@@ -17,6 +17,7 @@ const normalHitNum = 3
 var (
 	attackFrames   [][]int
 	attackHitmarks = []int{11, 9, 31}
+	attackCQA      = []int{11, 8, 31}
 
 	sharkBiteFrames      [][]int
 	sharkBiteHitmarks    = []int{7, 7, 7, 42}
@@ -108,7 +109,7 @@ func (c *char) Attack(p map[string]int) (action.Info, error) {
 	return action.Info{
 		Frames:          frames.NewAttackFunc(c.Character, attackFrames),
 		AnimationLength: attackFrames[c.NormalCounter][action.InvalidAction],
-		CanQueueAfter:   attackFrames[c.NormalCounter][action.ActionSwap],
+		CanQueueAfter:   attackCQA[c.NormalCounter],
 		State:           action.NormalAttackState,
 	}, nil
 }

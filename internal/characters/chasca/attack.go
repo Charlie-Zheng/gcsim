@@ -89,9 +89,9 @@ func (c *char) Attack(p map[string]int) (action.Info, error) {
 	}
 
 	defer c.AdvanceNormalIndex()
-
+	framesFunc := frames.NewAttackFunc(c.Character, attackFrames)
 	return action.Info{
-		Frames:          func(next action.Action) int { return frames.NewAttackFunc(c.Character, attackFrames)(next) + windup },
+		Frames:          func(next action.Action) int { return framesFunc(next) + windup },
 		AnimationLength: attackFrames[c.NormalCounter][action.InvalidAction] + windup,
 		CanQueueAfter:   attackHitmarks[c.NormalCounter][len(attackHitmarks[c.NormalCounter])-1] + windup,
 		State:           action.NormalAttackState,
