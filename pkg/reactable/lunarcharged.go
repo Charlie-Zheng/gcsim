@@ -141,7 +141,7 @@ func (r *Reactable) doSingleLCAttack(contribMap [info.MaxChars]bool, consumeAura
 		cr := ae.Snapshot.Stats[attributes.CR]
 		cd := ae.Snapshot.Stats[attributes.CD]
 		react := char.ReactBonus(ae.Info)
-		totalDmg := combat.CalcLunarReactionDmg(char.Base.Level, react, ae.Info, em)
+		totalDmg := combat.CalcSpecialReactionDmg(char.Base.Level, react, ae.Info, em)
 		isCrit := false
 
 		if r.core.Rand.Float64() <= cr {
