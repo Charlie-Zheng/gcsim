@@ -4025,7 +4025,7 @@
   "odette": [
     {
       "ability": "attack",
-      "invalid": true
+      "invalid": false
     },
     {
       "ability": "aim",
@@ -4033,7 +4033,7 @@
     },
     {
       "ability": "charge",
-      "invalid": true
+      "invalid": false
     },
     {
       "ability": "low_plunge",
@@ -4045,11 +4045,11 @@
     },
     {
       "ability": "skill",
-      "invalid": true
+      "invalid": false
     },
     {
       "ability": "burst",
-      "invalid": true
+      "invalid": false
     },
     {
       "ability": "dash",
