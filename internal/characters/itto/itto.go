@@ -183,9 +183,9 @@ func (c *char) NextQueueItemIsValid(k keys.Char, a action.Action, p map[string]i
 	if a == action.ActionCharge && c.Core.Player.LastAction.Type == action.ActionAttack && c.Core.Player.ActiveChar().NormalCounter == 0 && c.attackState() == attack0Stacks {
 		return player.ErrInvalidChargeAction
 	}
-	
+
 	if a == action.ActionCharge && c.slashState == SaichiSlash && c.slashState.Next(c.Tags[strStackKey], c.c6Proc) == SaichiSlash {
-        return fmt.Errorf("%v: Saichi Slash into Saichi Slash is invalid", c.Base.Key.String())
-    }
+		return fmt.Errorf("%v: Saichi Slash into Saichi Slash is invalid", c.Base.Key.String())
+	}
 	return c.Character.NextQueueItemIsValid(k, a, p)
 }
