@@ -160,7 +160,6 @@ func testFramesFunc(t *testing.T, k keys.Char, acts []action.Action, params []ma
 				t.Errorf("character %s action %s params: %v CanQueueAfter (%d) is larger than the output of evt.Frames[%s] (%d). Action sequence: %s", c.Player.ActiveChar().Base.Key.String(), a, p, evt.CanQueueAfter, act.String(), evt.Frames(act), acts[:i+1])
 				break
 			}
-
 		}
 		for !c.Player.CanQueueNextAction() {
 			advanceCoreFrame(c)
